@@ -28,7 +28,7 @@ rm -rf your-website-one.com
 rm -rf your-website-two.com
 
 #As recommended by the author of repository, download last version of nginx template
-curl -s
-https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl> ${ROOT_DIRECTORY}/${SERVICES_DIRECTORY_NAME}/nginx-proxy/nginx.tmpl
+curl -s https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl> ${ROOT_DIRECTORY}/${SERVICES_DIRECTORY_NAME}/nginx-proxy/nginx.tmpl
 
+cd nginx-proxy
 sudo docker-compose up -d
