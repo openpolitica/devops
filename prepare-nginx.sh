@@ -31,4 +31,5 @@ rm -rf your-website-two.com
 curl -s https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl> ${ROOT_DIRECTORY}/${SERVICES_DIRECTORY_NAME}/nginx-proxy/nginx.tmpl
 
 cd nginx-proxy
+sudo docker network create nginx-proxy
 sudo docker-compose up -d
