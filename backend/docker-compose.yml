@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  votu_backend_mariadb:
+    image: mariadb
+    restart: always    
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=op123%
+      - MYSQL_DATABASE=op
+      - MYSQL_USER=op
+      - MYSQL_PASSWORD=op123%
+    expose:
+      - 3306
+  votu_backend:
+    image: openpolitica/votu_backend:latest
+    restart: always
+    environment:
+      - DBHOST=votu_backend_mariadb
+      - DBNAME=op
+      - DBPORT=3306
+      - USERDB=op
+      - PASSWORDDB=op123%
+      - accessKeyId=${ACCESS_KEY_ID}
+      - secretAccessKey=${SECRET_ACCESS_KEY}
+      # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
+      - VIRTUAL_HOST=${HOST_DOMAIN}
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=${HOST_DOMAIN}
+      - LETSENCRYPT_EMAIL=${EMAIL_DOMAIN}
+      # END NGINX-PROXY ENVIRONMENT VARIABLES
+    expose:
+       - 3000
+    links:
+      - votu_backend_mariadb
+    depends_on:
+      - votu_backend_mariadb
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
