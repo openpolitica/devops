@@ -25,7 +25,8 @@ if [ -z $HOST_DOMAIN ] || [ -z $EMAIL_DOMAIN ]; then
   echo "Environment variables not set, loading .env file"
   cp ${INIT_DIR}/backend/.env ./
 else
-  echo "HOST_DOMAIN=${HOST_DOMAIN}\nEMAIL_DOMAIN=${EMAIL_DOMAIN}" >> .env
+  echo "HOST_DOMAIN=${HOST_DOMAIN}" > .env
+  echo "EMAIL_DOMAIN=${EMAIL_DOMAIN}" >> .env
 fi
 
 sudo docker build -t openpolitica/votu_backend:latest -f Dockerfile . 
