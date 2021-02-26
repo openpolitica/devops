@@ -25,5 +25,7 @@ unbuffer expect -c "
 spawn mysql_config_editor set --login-path=$LOGIN --host=$HOST --user=$USER --password
 expect -nocase \"Enter password:\" {send \"$PASS\r\"; interact}
 "
+#Prevent to reconfigure mysql_config_editor 
+sed -i "s/mysql_config_editor/#mysql_config_editor/g" reset_mysql.sh
 #Run the script to load the database
 ./reset_mysql.sh
