@@ -9,3 +9,5 @@ then
 else 
 	echo "Java is installed in your system... Skipping"
 fi
+
+sudo apt-get install -y expect
