@@ -16,6 +16,8 @@ LOGIN=local
 HOST=`sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' open-politica-backend_votu_backend_mariadb_1`
 USER=root
 
+# Prevent interative dialog for previous configurations
+rm -rf ~/.mylogin.cnf
 # Used to pass the password in simulating interactive mode
 # Based on https://stackoverflow.com/a/50732126/5107192
 unbuffer expect -c "
