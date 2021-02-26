@@ -17,7 +17,7 @@ Las tareas para esta automatización comprenden:
 	 java (para la actualización de la base de datos).
 2. Clonado de repositorio https://github.com/kassambara/nginx-multiple-https-websites-on-one-server.git para el despliegue de un proxy-reverso y la incorporación de servidores web desplegados en otros contenedores.
 3. Adaptación de carpetas del repositorio y despliegue de contenedores nginx
-	 (proxy reverso),nginx-gen (descubre otros contenedores en la red de
+	 (proxy reverso),nginx-gen (descubre otros contenedores en la red de
 	 nginx-proxy) y nginx-letsencrypt (genera los certificados para servidores
 	 descubiertos).
 4. Clonado de repositorio de backend

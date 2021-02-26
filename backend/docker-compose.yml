@@ -22,8 +22,6 @@ services:
       - DBPORT=3306
       - USERDB=op
       - PASSWORDDB=op123%
-      - accessKeyId=${ACCESS_KEY_ID}
-      - secretAccessKey=${SECRET_ACCESS_KEY}
       # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
       - VIRTUAL_HOST=${HOST_DOMAIN}
       - VIRTUAL_PORT=3000
