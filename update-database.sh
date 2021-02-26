@@ -8,6 +8,7 @@ if [ -z "$1" ]
 		SERVICES_DIRECTORY=$1
 fi
 
-cd ${SERVICES_DIRECTORY}
+BACKEND_DIRECTORY=${SERVICES_DIRECTORY}/open-politica-backend
+cd ${BACKEND_DIRECTORY}
 #Run the script to load the database
 ./src/dbtools/reset_mysql.sh
