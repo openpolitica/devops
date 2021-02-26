@@ -15,6 +15,7 @@ cd ${BACKEND_DIRECTORY}/src/dbtools
 LOGIN=local
 HOST=`sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' open-politica-backend_votu_backend_mariadb_1`
 USER=root
+PASS=op123%
 
 # Prevent interative dialog for previous configurations
 rm -rf ~/.mylogin.cnf
