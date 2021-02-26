@@ -10,5 +10,17 @@ fi
 
 BACKEND_DIRECTORY=${SERVICES_DIRECTORY}/open-politica-backend
 cd ${BACKEND_DIRECTORY}/src/dbtools
+
+#Configure the mysql_client
+LOGIN=local
+HOST=`sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' open-politica-backend_votu_backend_mariadb_1`
+USER=root
+
+# Used to pass the password in simulating interactive mode
+# Based on https://stackoverflow.com/a/50732126/5107192
+unbuffer expect -c "
+spawn mysql_config_editor set --login-path=$LOGIN --host=$HOST --user=$USER --password
+expect -nocase \"Enter password:\" {send \"$PASS\r\"; interact}
+"
 #Run the script to load the database
 ./reset_mysql.sh
