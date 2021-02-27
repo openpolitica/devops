@@ -42,9 +42,21 @@ HOST_DOMAIN=<your_subdomain_for_backend>
 EMAIL_DOMAIN=<your_registered_email>
 ```
 
-### Procedimiento para el despliegue mediante scripts del repositorio
-Antes de proceder con el despliegue como se mencionó en el párrafo anterior, es
-necesario establecer las variables de entorno. Estas variables pueden ser
+## Instalación
+Los scripts ubicados en este repositorio no requieren de un instalación
+propiamente, solamente del clonado del repositorio, que podría ser en la
+carpeta home del usuario una vez que inicia sesión mediante SSH:
+```
+ssh -i ./id_rsa user@ipaddress
+cd
+git clone https://github.com/openpolitica/devops.git
+cd devops
+```
+
+## Uso de scripts
+Como se mencionó en [Automatización del backend](#automatización-del-backend), es
+necesario establecer las variables de entorno para configurar el dominio donde
+se desplegará el backend `HOST_DOMAIN` y el correo asociado a su registro `EMAIL_DOMAIN`. Estas variables pueden ser
 establecidas de tres maneras:
 
 1. De forma global, mediante `export`:
