@@ -72,3 +72,6 @@ El script que realiza el despliegue completo en el servidor es `./deploy-all.sh`
 ```
 HOST_DOMAIN=mysubdomain.domain.com EMAIL_DOMAIN=myemail@mail.com ./deploy-all.sh
 ```
+
+Para más información del uso de los otros scripts, puede visitar la [Wiki del
+proyecto](https://github.com/openpolitica/devops/wiki).
