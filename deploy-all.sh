@@ -5,9 +5,6 @@ ROOT_DIRECTORY=${HOME}
 SERVICES_DIRECTORY_NAME=services
 SERVICES_DIRECTORY=${ROOT_DIRECTORY}/${SERVICES_DIRECTORY_NAME}
 
-# move to home directory
-cd ${ROOT_DIRECTORY}
-
 # Installing docker and java
 sudo ./install-docker.sh
 sudo ./install-java.sh
