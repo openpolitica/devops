@@ -10,4 +10,11 @@ else
 	echo "Java is installed in your system... Skipping"
 fi
 
-sudo apt-get install -y expect
+if ! command -v expect &> /dev/null
+then
+	#Installing expect
+	sudo apt-get update
+	sudo apt-get install -y expect
+else 
+	echo "Expect is installed in your system... Skipping"
+fi

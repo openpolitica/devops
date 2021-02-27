@@ -11,6 +11,7 @@ cd ${ROOT_DIRECTORY}
 # Installing docker and java
 sudo ./install-docker.sh
 sudo ./install-java.sh
+sudo ./install-mysql-client.sh
 
 # Prepare nginx environment
 ./prepare-nginx.sh ${ROOT_DIRECTORY} ${SERVICES_DIRECTORY_NAME}
