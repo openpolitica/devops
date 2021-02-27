@@ -33,14 +33,30 @@ Las tareas para esta automatización comprenden:
 	 mediante la ejecución de un script en el repositorio del backend.
 
 Es importante notar que para el despliegue del backend es necesario establecer
-algunas variables de entorno, esto debido a que es información sensible. En
-este caso, las variables de entorno se establecen en un archivo `.env` en el
-root del repositorio de backend, donde se ubica también el archivo
+algunas variables de entorno, esto debido a que es información sensible y no se
+ha considerado como parte del control de versiones. En
+este caso, las variables de entorno se establecen en un archivo `.env` en la carpeta `backend`, donde se ubica también el archivo
 `docker-compose.yml`. La información que debe tener archivo es la siguiente:
 ```
-ACCESS_KEY_ID=<your_access_key>
-SECRET_ACCESS_KEY=<your_secret_access>
 HOST_DOMAIN=<your_subdomain_for_backend>
 EMAIL_DOMAIN=<your_registered_email>
 ```
 
+### Procedimiento para el despliegue mediante scripts del repositorio
+Antes de proceder con el despliegue como se mencionó en el párrafo anterior, es
+necesario establecer las variables de entorno. Estas variables pueden ser
+establecidas de tres maneras:
+
+1. De forma global, mediante `export`:
+```
+export HOST_DOMAIN=<your_subdomain_for_backend>
+export EMAIL_DOMAIN=<your_registered_email>
+```
+2. Dentro del archivo `.env` en la carpeta `backend` de este repositorio.
+
+3. Como variables en shell acompañando al comando para ejecutar el script.
+
+El script que realiza el despliegue completo en el servidor es `./deploy-all.sh`, y un ejemplo de uso, definiendo las variables en el shell, sería:
+```
+HOST_DOMAIN=mysubdomain.domain.com EMAIL_DOMAIN=myemail@mail.com ./deploy-all.sh
+```
