@@ -28,18 +28,17 @@ fi
 #Set environment variables
 MYSQL_HOST=`sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' open-politica-backend_votu_backend_mariadb_1`
 MYSQL_USER=root
+MYSQL_PWD=op123%
 LOGIN=local
 
 # Delete previous configuration
 rm -rf ~/.mylogin.cnf
-export MYSQL_HOST=$MYSQL_HOST
-export MYSQL_PWD=$MYSQL_PWD
-export MYSQL_TCP_PORT=$MYSQL_TCP_PORT
 
-# Login to mysql
-echo "----------------------------------------------"
-echo "#### Login to MySQL"
-mysql_config_editor set --login-path=$LOGIN --skip-warn --user=$MYSQL_USER 
+# Used to pass the password in simulating interactive mode
+unbuffer expect -c "
+spawn mysql_config_editor set --login-path=$LOGIN --host=$MYSQL_HOST --user=$MYSQL_USER --password
+expect -nocase \"Enter password:\" {send \"$MYSQL_PWD\r\"; interact}
+"
 
 DATABASE_NAME=op
 
