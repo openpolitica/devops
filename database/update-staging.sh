@@ -48,8 +48,9 @@ rm -rf ~/.mylogin.cnf
 export MYSQL_HOST=$MYSQL_HOST
 export MYSQL_PWD=$MYSQL_PWD
 export MYSQL_TCP_PORT=$MYSQL_TCP_PORT
-mysql_config_editor set --login-path=$LOGIN --host=$HOST --user=$MYSQL_USER
 
+#restore changes made for other scripts
+git restore reset_mysql.sh
 #Run the script to load the database
 ./reset_mysql.sh
 
@@ -57,4 +58,4 @@ cd ${INIT_DIR}
 DATABASE_NAME=op
 
 #Create a copy for a modified database
-mysqldump --databases $DATABASE_NAME > database.sql
+mysqldump --user $MYSQL_USER --password $MYSQL_PWD --host $MYSQL_HOST --databases $DATABASE_NAME > database.sql
