@@ -11,4 +11,4 @@ DATABASE_BACKUP_NAME=database.back.sql
 
 #Create a copy for a modified database
 #Column-statistics is disabled, otherwise will throw an error
-mysqldump --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > $DATABASE_BACKUP_NAME
+mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > $DATABASE_BACKUP_NAME
