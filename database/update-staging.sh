@@ -59,4 +59,4 @@ DATABASE_NAME=op
 
 #Create a copy for a modified database
 #Column-statistics is disabled, otherwise will throw an error
-mysqldump --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > database.sql
+mysqldump --column-statistics=0 --login-path=$LOGIN --databases $DATABASE_NAME > database.sql
