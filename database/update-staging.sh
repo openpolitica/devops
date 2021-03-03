@@ -45,6 +45,9 @@ if [ -z $MYSQL_TCP_PORT ]; then
 fi
 
 rm -rf ~/.mylogin.cnf
+export MYSQL_HOST=$MYSQL_HOST
+export MYSQL_PWD=$MYSQL_PWD
+export MYSQL_TCP_PORT=$MYSQL_TCP_PORT
 mysql_config_editor set --login-path=$LOGIN --host=$HOST --user=$MYSQL_USER
 
 #Run the script to load the database
