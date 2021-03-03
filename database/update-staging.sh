@@ -58,4 +58,4 @@ cd ${INIT_DIR}
 DATABASE_NAME=op
 
 #Create a copy for a modified database
-mysqldump --user $MYSQL_USER --password $MYSQL_PWD --host $MYSQL_HOST --databases $DATABASE_NAME > database.sql
+mysqldump --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > database.sql
