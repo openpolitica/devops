@@ -7,8 +7,9 @@ if [ !  -f "$DATABASE_BACKUP_FILEPATH" ];then
   exit 1
 fi
 
+dt=$(date '+%d/%m/%Y %H:%M:%S');
 git add $DATABASE_BACKUP_FILEPATH
-git commit -m "Update database"
+git commit -m "Update database $dt"
 
 if [ -z $GIT_USER ] || [ -z $GIT_API ]; then
   echo "Environment variables not set, you should pass in prompt"
