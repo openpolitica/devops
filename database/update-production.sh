@@ -43,7 +43,7 @@ expect -nocase \"Enter password:\" {send \"$MYSQL_PWD\r\"; interact}
 DATABASE_NAME=op
 
 #Drop database
-mysqladmin --login-path=$LOGIN drop $DATABASE_NAME 
+mysqladmin --login-path=$LOGIN -f drop $DATABASE_NAME 
 mysqladmin --login-path=$LOGIN create $DATABASE_NAME 
 
 #Restore from backup
