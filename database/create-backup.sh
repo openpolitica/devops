@@ -10,4 +10,4 @@ MYSQL_PWD=op123%
 
 #Create a copy for a modified database
 #Column-statistics is disabled, otherwise will throw an error
-mysqldump --skip-warn --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > database.sql
+mysqldump --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > database.sql
