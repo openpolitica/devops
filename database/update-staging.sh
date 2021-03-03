@@ -55,8 +55,4 @@ git restore reset_mysql.sh
 ./reset_mysql.sh
 
 cd ${INIT_DIR}
-DATABASE_NAME=op
-
-#Create a copy for a modified database
-#Column-statistics is disabled, otherwise will throw an error
-mysqldump --login-path=$LOGIN --column-statistics=0  --databases $DATABASE_NAME > database.sql
+./create-backup.sh
