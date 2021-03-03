@@ -17,7 +17,10 @@ if [ !  -f "$DATABASE_FILEPATH" ];then
   mv $DATABASE_BACKUP_FILEPATH $DATABASE_FILEPATH
 else
   #Comparing both databases
-  DIFFERENCES=`diff $DATABASE_FILEPATH $DATABASE_BACKUP_FILEPATH`
+  # -I '^-- Dump completed on' avoids timestamp in dumps.
+  # it also could be useful with --skip-dump-date when generating dumps
+  # Based on https://stackoverflow.com/a/61417132/5107192
+  DIFFERENCES=`diff -I '^-- Dump completed on' $DATABASE_FILEPATH $DATABASE_BACKUP_FILEPATH`
   if [ -z $DIFFERENCES]; then
     echo "Both databases are equal, do not commit"
     exit 0 
