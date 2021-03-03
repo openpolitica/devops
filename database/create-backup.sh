@@ -6,12 +6,8 @@ MYSQL_USER=root
 LOGIN=local
 
 DATABASE_NAME=op
+MYSQL_PWD=op123%
 
-rm -rf ~/.mylogin.cnf
-export MYSQL_HOST=$MYSQL_HOST
-export MYSQL_PWD=$MYSQL_PWD
-export MYSQL_TCP_PORT=$MYSQL_TCP_PORT
-mysql_config_editor set --login-path=local --skip-warn --user=root
 #Create a copy for a modified database
 #Column-statistics is disabled, otherwise will throw an error
-mysqldump --login-path=$LOGIN --column-statistics=0  --databases $DATABASE_NAME > database.sql
+mysqldump --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > database.sql
