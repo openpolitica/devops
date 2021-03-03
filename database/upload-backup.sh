@@ -3,15 +3,32 @@
 #Init directory 
 INIT_DIR=${PWD}
 
-DATABASE_BACKUP_FILEPATH=${INIT_DIR}/database.sql
+DATABASE_FILEPATH=${INIT_DIR}/database.sql
+DATABASE_BACKUP_FILEPATH=${INIT_DIR}/database.back.sql
 # Check if there is a backup in path
 if [ !  -f "$DATABASE_BACKUP_FILEPATH" ];then
   echo "Backup file doesn't found in directory, skipping"
   exit 1
 fi
 
+
+if [ !  -f "$DATABASE_FILEPATH" ];then
+  echo "Previous database doesn't exit. Move current backup"
+  mv $DATABASE_BACKUP_FILEPATH $DATABASE_FILEPATH
+else
+  #Comparing both databases
+  DIFFERENCES=`diff $DATABASE_FILEPATH $DATABASE_BACKUP_FILEPATH`
+  if [ -z $DIFFERENCES]; then
+    echo "Both databases are equal, do not commit"
+    exit 0 
+  fi
+  # Databases are different so update database
+  rm $DATABASE_FILEPATH
+  cp $DATABASE_BACKUP_FILEPATH $DATABASE_FILEPATH
+fi
+
 dt=$(date '+%d/%m/%Y %H:%M:%S');
-git add $DATABASE_BACKUP_FILEPATH
+git add $DATABASE_FILEPATH
 
 
 SAVED_USER=`git config user.name`
