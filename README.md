@@ -62,7 +62,6 @@ contempla los siguientes pasos:
 	Este servidor es de pruebas, por lo que servirá para realizar las
 	modificaciones necesarias en la base de datos y constatar si realmente
 	requiere de una actualización. Para ello se realiza lo siguiente:
-	
   * Se efectúa el reset de la base de datos con el script `reset_mysql.sh` y se
 			crea un backup de esta base de datos.
 	* Se compara el backup con la base de datos que se encuentra en el
@@ -155,9 +154,11 @@ de producción como en el staging se ha clonado este repositorio):
 
    * Ejecutar el script `update-staging.sh`. Este script requiere que el
 			 despliegue tenga una estructura de directorios como el mostrado en [Estructura de directorios](#estructura-de-directorios). Este script también generará una imagen de la base de datos con el nombre `database.back.sql`.
+
 			 ```
 			 ./update-staging.sh
 			 ```
+			 
 	 * Ejecutar el script `upload-backup.sh`. Este script requiere de ingresar el
 			 nombre de usuario y contraseña de GIT. No obstante, esto se puede
 			 efectuar mediante variables de entorno:
@@ -165,9 +166,11 @@ de producción como en el staging se ha clonado este repositorio):
 			 - `GIT_EMAIL` es el email del usuario (requerido para commit).
 			 - `GIT_API` es el token del usuario (requerido para push).
      Un ejemplo de uso empleado estas variables es la siguiente:
+
 			 ```
 		    GIT_USER=Myuser GIT_EMAIL=user@email.com GIT_API=AKjshkkk...Sdj ./upload-backup
 			 ```
+
 		 Este script subirá los cambios solo si el contenido de la nueva base de
 		 datos es diferente a la del repositorio.
 
@@ -179,6 +182,7 @@ de producción como en el staging se ha clonado este repositorio):
 			 copia de la base de datos actual en producción y la compara con la del
 			 repositorio. Solo en el caso que sea diferente, realiza la actualización
 			 de la base de datos en producción.
+
 			 ```
 			 ./update-production.sh
 			 ```
