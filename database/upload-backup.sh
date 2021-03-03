@@ -1,5 +1,8 @@
 #/bin/bash -x
 
+#Init directory 
+INIT_DIR=${PWD}
+
 DATABASE_BACKUP_FILEPATH=${INIT_DIR}/database.sql
 # Check if there is a backup in path
 if [ !  -f "$DATABASE_BACKUP_FILEPATH" ];then
