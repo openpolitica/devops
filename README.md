@@ -59,10 +59,11 @@ realizar la actualización de la base de datos en producción sin que demande un
 tiempo excesivo y solamente se realice cuando sea necesario. Este procedimiento
 contempla los siguientes pasos:
 1. **En el servidor staging:**
-	Este servidor es de pruebas, por lo que servirá para realizar las
+   Este servidor es de pruebas, por lo que servirá para realizar las
 	modificaciones necesarias en la base de datos y constatar si realmente
 	requiere de una actualización. Para ello se realiza lo siguiente:
-  * Se efectúa el reset de la base de datos con el script `reset_mysql.sh` y se
+	
+	* Se efectúa el reset de la base de datos con el script `reset_mysql.sh` y se
 			crea un backup de esta base de datos.
 	* Se compara el backup con la base de datos que se encuentra en el
 			repositorio (previamente creado con una versión anterior de la base de
@@ -151,38 +152,36 @@ El procedimiento para usarlos es el siguiente (se asume que tanto en el sevidor
 de producción como en el staging se ha clonado este repositorio):
 
 1. En el servidor staging:
+	* Ejecutar el script `update-staging.sh`. Este script requiere que el
+	     despliegue tenga una estructura de directorios como el mostrado en [Estructura de directorios](#estructura-de-directorios). Este script también generará una imagen de la base de datos con el nombre `database.back.sql`.
 
-   * Ejecutar el script `update-staging.sh`. Este script requiere que el
-			 despliegue tenga una estructura de directorios como el mostrado en [Estructura de directorios](#estructura-de-directorios). Este script también generará una imagen de la base de datos con el nombre `database.back.sql`.
-
-			 ```
-			 ./update-staging.sh
-			 ```
-			 
-	 * Ejecutar el script `upload-backup.sh`. Este script requiere de ingresar el
+	* Ejecutar el script `upload-backup.sh`. Este script requiere de ingresar el
 			 nombre de usuario y contraseña de GIT. No obstante, esto se puede
 			 efectuar mediante variables de entorno:
+			 
 			 - ̣`GIT_USER` es el nombre de usuario (requerido para commit).
 			 - `GIT_EMAIL` es el email del usuario (requerido para commit).
 			 - `GIT_API` es el token del usuario (requerido para push).
-     Un ejemplo de uso empleado estas variables es la siguiente:
+		
+   Un ejemplo de uso empleado estas variables es la siguiente:
 
-			 ```
-		    GIT_USER=Myuser GIT_EMAIL=user@email.com GIT_API=AKjshkkk...Sdj ./upload-backup
-			 ```
+```
+./update-staging.sh
+GIT_USER=Myuser GIT_EMAIL=user@email.com GIT_API=AKjshkkk...Sdj ./upload-backup
+```
 
-		 Este script subirá los cambios solo si el contenido de la nueva base de
-		 datos es diferente a la del repositorio.
+   Este script subirá los cambios solo si el contenido de la nueva base de
+    datos es diferente a la del repositorio.
 
 
 2. En el servidor de producción:
-
-   * Ejecutar el script `update-production.sh`. Este script obtiene la versión
+	
+	* Ejecutar el script `update-production.sh`. Este script obtiene la versión
 			 más actual de la base de datos en este repositorio. Luego, crea una
 			 copia de la base de datos actual en producción y la compara con la del
 			 repositorio. Solo en el caso que sea diferente, realiza la actualización
 			 de la base de datos en producción.
 
-			 ```
-			 ./update-production.sh
-			 ```
+```
+./update-production.sh
+```
