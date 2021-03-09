@@ -185,3 +185,35 @@ GIT_USER=Myuser GIT_EMAIL=user@email.com GIT_API=AKjshkkk...Sdj ./upload-backup
 ```
 ./update-production.sh
 ```
+#### Utilizando el servicio cron
+Dentro de la carpeta `database` hay una carpeta `services` donde se encuentra
+los archivos para la configuración de un servicio cron para la ejecución del
+script en el servidor staging. Para utilizar estos archivos realizar los
+siguientes pasos:
+
+1. Modificar el archivo `op-updatedb` en la variable de entorno
+	 `DATABASE_SCRIPT_DIR` de acuerdo a la ubicación de los scripts en la máquina
+	 virtual. Lamentablemente, cron no admite una recursión en el reemplazo de
+	 las variables por lo que no se ha podido emplear una variable dentro de
+	 `DATABASE_SCRIPT_DIR`.
+2. Ejecutar el script `add-cron.sh` con sudo, el cual se encarga de subir este
+	 archivo en el directorio `/etc/cron.d/`.
+```bash
+sudo ./add-cron.sh
+```
+
+**Nota importante:**
+
+*  Para poder verificar que el evento cron se ha ejecutado se
+	 puede verificar en el log del sistema ubicado en `/var/log/syslog`, donde en la
+	 hora que se encuentra configurado, se debe visualizar el log de la ejecución.
+	 Recordar también que la hora que figura en cron, posiblemente se encuentre en UTC, por
+	 lo que no coincida con el mismo valor en el log. Para ello simplemente se tendría que buscar
+	 su equivalente en la zona horaria actual.
+
+* Para hacer un debug del evento cron, es necesario tener un medio de
+	 via mail en el sistema, puesto que es lo que emplea cron para enviar sus
+	 logs. En ese caso, se puede instalar en el sistema el programa `postfix` tal
+	 como se sugiere en esta [respuesta](https://askubuntu.com/a/234884). Luego
+	 se puede ver el resultado en `/var/mail/<user>`. Donde, para este caso, user
+	 es `deploy`.
