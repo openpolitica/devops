@@ -1,10 +1,14 @@
 # Cron for updating the database for openpolitica server
 # Uses scripts update-staging.sh y upload-backup.sh
 DATABASE_SCRIPT_DIR=/home/deploy/devops/database
+PATH=/usr/local/bin:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
+GIT_USER=<user>
+GIT_EMAIL=<email>
+GIT_API=<api_token>
 
 # runs everyday at 12:00pm
 # It must have exported GIT_USER, GIT_EMAIL, GIT_API for upload-backup to work
 # It also must have the repository of devops on database-update branch to get
 # the required scripts
-0 12 * * * deploy $DATABASE_SCRIPT_DIR/update-staging.sh && $DATABASE_SCRIPT_DIR/upload-backup.sh 
+0 12 * * * deploy cd $DATABASE_SCRIPT_DIR && ./update-staging.sh /home/deploy/www && ./upload-backup.sh
 
