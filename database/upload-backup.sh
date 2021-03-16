@@ -3,6 +3,9 @@
 #Init directory 
 INIT_DIR=${PWD}
 
+#Get latest changes from repository
+git pull
+
 DATABASE_FILEPATH=${INIT_DIR}/database.sql
 DATABASE_BACKUP_FILEPATH=${INIT_DIR}/database.back.sql
 # Check if there is a backup in path
