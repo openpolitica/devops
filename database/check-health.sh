@@ -12,7 +12,7 @@
 # export MYSQL_TCP_PORT=tcp_port_if_not_3306
 
 #Global variables
-CANDIDATE_NUMBER_THRESHOLD=2000
+CANDIDATE_NUMBER_THRESHOLD=2200
 
 # Includes all tables which has some relationship with candidate
 candidate_related_tables=(\
@@ -34,32 +34,31 @@ candidate_related_tables=(\
 expected_tables=(\
   ${candidate_related_tables[@]} \
   locations \
-  proceso_electoral \
   dirty_lists \
 )
 
 # We expect some tables has the same number as the candidates number
 # other tables are not directly related to candidate number so the threshold is
 # hardcoded in those cases
+# Data_ec and dirty_lists are hardcoded as they come from csv
 threshold_minimum=(\
   $CANDIDATE_NUMBER_THRESHOLD \
-  3000 \
-  2000 \
-  3500 \
   $CANDIDATE_NUMBER_THRESHOLD \
-  11000 \
-  5000 \
+  $(( $CANDIDATE_NUMBER_THRESHOLD/2 )) \
+  $CANDIDATE_NUMBER_THRESHOLD \
+  2544 \
+  $(( 5*$CANDIDATE_NUMBER_THRESHOLD )) \
+  $(( 2*$CANDIDATE_NUMBER_THRESHOLD )) \
   $CANDIDATE_NUMBER_THRESHOLD \
   $CANDIDATE_NUMBER_THRESHOLD \
   150 \
   150 \
   50 \
   25 \
-  2000 \
-  150 \
+  182 \
   )
 
-generated_tables=(candidato afiliacion data_ec extra_data locations dirty_lists proceso_electoral)
+generated_tables=(candidato afiliacion data_ec extra_data locations dirty_lists )
 
 source ./logger.sh
 SCRIPTENTRY
@@ -191,7 +190,7 @@ DEBUG  "${VALUES_2[@]}"
 for table_name in ${VALUES_1[@]}; do
   index=`get_index $table_name ${VALUES_1[@]}`
 
-  if [[ "${VALUES_2[$j]}" > "${threshold_minimum[$index]}" ]]; then
+  if [ "${VALUES_2[$j]}" -ge "${threshold_minimum[$index]}" ]; then
     INFO "Number of rows in $table_name, ${VALUES_2[$j]} greater than minimum ${threshold_minimum[$index]}... Ok."
   else
     ERROR "Number of rows in $table_name, lesser than minimum. It has ${VALUES_2[$j]} and expect a minimum of ${threshold_minimum[$index]} ... Fail."
