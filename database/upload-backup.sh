@@ -3,6 +3,14 @@
 #Init directory 
 INIT_DIR=${PWD}
 
+echo "Staring health checking...".
+./check-health.sh
+
+if [[ ! $? = 0 ]]; then
+  echo "Check-health has failed, can't upload".
+  exit 1
+fi
+
 #Get latest changes from repository
 git pull
 
