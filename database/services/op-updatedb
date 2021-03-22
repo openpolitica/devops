@@ -10,5 +10,5 @@ GIT_API=<api_token>
 # It must have exported GIT_USER, GIT_EMAIL, GIT_API for upload-backup to work
 # It also must have the repository of devops on database-update branch to get
 # the required scripts
-0 12 * * * deploy cd $DATABASE_SCRIPT_DIR && ./update-staging.sh /home/deploy/www && ./upload-backup.sh
+0 12 * * * deploy cd $DATABASE_SCRIPT_DIR && ./update-staging.sh /home/deploy/www && /bin/bash ./upload-backup.sh
 
