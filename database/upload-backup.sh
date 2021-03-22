@@ -3,6 +3,8 @@
 #Init directory 
 INIT_DIR=${PWD}
 
+#Set environment variables
+source ./load-credentials.sh
 echo "Staring health checking...".
 ./check-health.sh
 

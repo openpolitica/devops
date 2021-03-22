@@ -30,24 +30,7 @@ fi
 cd ${BACKEND_DIRECTORY}/src/dbtools
 
 #Set environment variables
-MYSQL_HOST=`sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' open-politica-backend_votu_backend_mariadb_1`
-MYSQL_USER=root
-LOGIN=local
-
-if [ -z $MYSQL_PWD ]; then
-  echo "Environment variable MYSQL_PWD not set, replacing by default value"
-  MYSQL_PWD=op123%
-fi
-
-if [ -z $MYSQL_TCP_PORT ]; then
-  echo "Environment variable MYSQL_TCP_PORT not set, replacing by default value"
-  MYSQL_TCP_PORT=3306
-fi
-
-rm -rf ~/.mylogin.cnf
-export MYSQL_HOST=$MYSQL_HOST
-export MYSQL_PWD=$MYSQL_PWD
-export MYSQL_TCP_PORT=$MYSQL_TCP_PORT
+source ./load-credentials.sh
 
 #restore changes made for other scripts
 git restore reset_mysql.sh
