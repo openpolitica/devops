@@ -47,4 +47,4 @@ mysqladmin --login-path=$LOGIN -f drop $DATABASE_NAME
 mysqladmin --login-path=$LOGIN create $DATABASE_NAME 
 
 #Restore from backup
-mysql --login-path=$LOGIN --database=op < $DATABASE_BACKUP_FILEPATH
+mysql --login-path=$LOGIN --database=op < $DATABASE_FILEPATH
