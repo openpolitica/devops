@@ -30,7 +30,7 @@ fi
 cd ${BACKEND_DIRECTORY}/src/dbtools
 
 #Set environment variables
-source ./load-credentials.sh
+source ${INIT_DIR}/load-credentials.sh
 
 #restore changes made for other scripts
 git restore reset_mysql.sh
