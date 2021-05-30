@@ -1,0 +1,47 @@
+version: '3.6'
+
+services:
+  db:
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    restart: always    
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=op123%
+      - MYSQL_DATABASE=op
+      - MYSQL_USER=op
+      - MYSQL_PASSWORD=op123%
+    expose:
+      - 3306
+  app:
+    image: matomo:fpm-alpine
+    restart: always
+    volumes:
+      - ./config:/var/www/html/config:rw
+      - ./logs:/var/www/html/logs
+      - matomo:/var/www/html
+    environment:
+      - MATOMO_DATABASE_HOST=db
+      - MATOMO_DATABASE_USERNAME=op
+      - MATOMO_DATABASE_PASSWORD=op123%
+      - MATOMO_DATABASE_DBNAME=op
+      # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
+      - VIRTUAL_HOST=${HOST_DOMAIN}
+      - VIRTUAL_PORT=9000
+      - VIRTUAL_PROTO=fastcgi
+      - VIRTUAL_ROOT=/var/www/html
+      - LETSENCRYPT_HOST=${HOST_DOMAIN}
+      - LETSENCRYPT_EMAIL=${EMAIL_DOMAIN}
+      # END NGINX-PROXY ENVIRONMENT VARIABLES
+    depends_on:
+      - db
+
+volumes:
+  matomo:
+  db:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
