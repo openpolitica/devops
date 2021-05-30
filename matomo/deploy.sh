@@ -27,4 +27,9 @@ else
   echo "EMAIL_DOMAIN=${EMAIL_DOMAIN}" >> .env
 fi
 
+#Copy files to nginx-proxy
+PROXY_DIRECTORY=${SERVICES_DIRECTORY}/nginx-proxy
+cp ${INIT_DIR}/matomo.conf ${PROXY_DIRECTORY}/vhost.d/${HOST_DOMAIN}
+sudo sed -i 's/php-handler/'${HOST_DOMAIN}'-upstream/g' ${PROXY_DIRECTORY}/vhost.d/${HOST_DOMAIN}
+
 sudo docker-compose up -d
